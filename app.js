@@ -41,9 +41,9 @@ angular.module('formApp', ['ngAnimate', 'ui.router'])
         })
 
         // url will be /form/payment
-        .state('form.payment', {
-            url: '/payment',
-            templateUrl: 'form-payment.html'
+        .state('form.confirmar', {
+            url: '/confirmar',
+            templateUrl: 'form-confirmar.html'
         });
 
     // catch all route
@@ -65,7 +65,39 @@ angular.module('formApp', ['ngAnimate', 'ui.router'])
 
     // function to process the form
     $scope.processForm = function() {
-        alert('awesome!');
+      var apiURL = 'http://localhost:1337/';
+      var typeURL = apiURL + 'alumno';
+
+      $scope.mensajeParaUsuario = {};
+
+
+      $http({
+        url: typeURL,
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        data: $scope.newAlumno
+      })
+      .then(function success(res){
+        console.log("Info:: Respuesta del servidor: ", res.data);
+        if(res.data.id){
+          $scope.mensajeParaUsuario = {
+            success:true,
+            mensaje: 'El alumno ' + res.data.nombre + 'fue registrado con éxito, con id: ' + res.data.id
+          };
+
+        }
+
+      },function error(res){
+        console.error("Error: Respuesta del servidor: ", res.data);
+        if(res.data.error){
+          $scope.mensajeParaUsuario = {
+            error:true,
+            mensaje: 'Hay un error en los datos enviados, el alumno no fue registrado. Quizás no se especificó una escuela de la lista.'
+          };
+        }
+
+      });
+
     };
 
     $scope.loadByType = function(type){

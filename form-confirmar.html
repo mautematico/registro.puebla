@@ -1,0 +1,45 @@
+<div class="text-center">
+  <span class="glyphicon glyphicon-search"></span>
+  <h3>¡Sólo falta confirmar!</h3>
+  <h4>Por favor revisa que tus datos sean correctos. <br />
+    Si todo está en orden, envíalos
+  </h4>
+
+
+  <hr />
+
+  <h2>Datos personales</h2>
+  <div class="form-group">
+    <label for="name">Nombre completo</label>
+    <input type="text" disabled class="form-control" name="newAlumnoNombre" ng-model="newAlumno.nombre">
+  </div>
+  <div class="form-group">
+    <label for="name">Correo electrónico</label>
+    <input type="text" disabled class="form-control" name="newAlumnoEmail" ng-model="newAlumno.email">
+  </div>
+  <div class="form-group">
+    <label for="name">Fecha de nacimiento</label>
+    <input type="text" disabled class="form-control" name="newAlumnoFechaDeNacimiento" ng-model="newAlumno.fechaDeNacimiento">
+  </div>
+
+  <h2>Datos de la escuela</h2>
+  <div class="form-group">
+      <label for="name">Nombre de la escuela:</label>
+      <input type="text" disabled class="form-control" name="escuelaNombre" ng-model="newEscuela.nombre">
+  </div>
+
+
+
+  <button type="submit" class="btn btn-success">Submit</button>
+
+  <div class="form-group row">
+    <div ng-show="mensajeParaUsuario.success" class="alert alert-success">
+      <strong>¡Bien!</strong> {{mensajeParaUsuario.mensaje}}.
+    </div>
+    <div ng-show="mensajeParaUsuario.error" class="alert alert-danger">
+      <strong>¡Ups!</strong> {{mensajeParaUsuario.mensaje}}.
+    </div>
+  </div>
+
+
+</div>
