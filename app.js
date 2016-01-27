@@ -47,6 +47,9 @@ angular.module('formApp', ['ngAnimate', 'ui.router'])
 
     // we will store all of our form data in this object
     $scope.formData = {};
+    $scope.newPoblado = {};
+    $scope.newEscuela = {};
+    $scope.newAlumno = {};
 
     // function to process the form
     $scope.processForm = function() {
