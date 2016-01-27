@@ -21,22 +21,41 @@
 </div>
 
 <div class="form-group row">
+  <div ng-show="mensajeParaUsuario.success" class="alert alert-success">
+    <strong>¡Bien!</strong> {{mensajeParaUsuario.mensaje}}.
+  </div>
+  <div ng-show="mensajeParaUsuario.error" class="alert alert-danger">
+    <strong>¡Ups!</strong> {{mensajeParaUsuario.mensaje}}.
+  </div>
+</div>
 
-<div class="col-xs-6 col-xs-offset-3" ng-show="!newEscuela.id">
+
+<div class="form-group row">
+
+<!--div class="col-xs-6 col-xs-offset-3" ng-show="false">
     <a ui-sref="form.interests" class="btn btn-block btn-info">
     El poblado de mi escuela no está en la lista <span class="glyphicon glyphicon-plus"></span>
     </a>
-</div>
+</div-->
 
-<div class="col-xs-6" ng-show="newEscuela.id">
+<!--div class="col-xs-6" ng-show="newEscuela.id">
     <a class="btn btn-block btn-danger" ng-click="reiniciarEscuela()">
     <span class="glyphicon glyphicon-circle-arrow-left"></span> Volver a buscar
     </a>
-</div>
+</div-->
 
-<div class="col-xs-6" ng-show="newEscuela.id">
-    <a ui-sref="form.personal" class="btn btn-block btn-info">
-    Continuar <span class="glyphicon glyphicon-circle-arrow-right"></span>
+
+<div class="col-xs-6 col-xs-offset-3" ng-show="validarNewEscuela() && !newEscuela.id">
+    <a ng-click="registrarNewEscuela()" class="btn btn-block btn-warning">
+    Registrar mi escuela <span class="glyphicon glyphicon-plus"></span>
     </a>
 </div>
+
+
+<div class="col-xs-6 col-xs-offset-3" ng-show="newEscuela.id && newEscuela.nombre">
+    <a ui-sref="form.personal" class="btn btn-block btn-success">
+    Continuar con datos personales <span class="glyphicon glyphicon-circle-arrow-right"></span>
+    </a>
+</div>
+
 </div>

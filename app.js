@@ -101,21 +101,27 @@ angular.module('formApp', ['ngAnimate', 'ui.router'])
     };
 
     $scope.seleccionarEscuela = function(escuela){
+
       $scope.newEscuela = {
         id: escuela.id,
         nombre: escuela.nombre,
         poblado : {
-          nombre: escuela.poblado.nombre
+          nombre: escuela.poblado.nombre,
+          id:escuela.poblado.id
         }
       };
+
+      if(escuela.poblado === parseInt(escuela.poblado, 10) ){
+        $scope.newEscuela.poblado.id = escuela.poblado;
+      }
 
       $scope.newAlumno.escuela = escuela.id;
     };
 
     $scope.seleccionarPobladoE = function(poblado){
       $scope.newEscuela.poblado = {
-          nombre: poblado.nombre,
-          id: poblado.id
+          id: poblado.id,
+          nombre: poblado.nombre
       };
     };
 
@@ -135,6 +141,49 @@ angular.module('formApp', ['ngAnimate', 'ui.router'])
 
     $scope.esLaEscuelaElegida = function(escuela){
       return (escuela.id === $scope.newEscuela.id);
+    };
+
+    $scope.validarNewEscuela = function(){
+      if( $scope.newEscuela.nombre && $scope.newEscuela.poblado.id)
+        return true;
+      return false;
+    };
+
+    $scope.registrarNewEscuela = function(){
+      var apiURL = 'http://localhost:1337/';
+      var typeURL = apiURL + 'escuela';
+
+      $http({
+        url: typeURL,
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        data: {
+          nombre: $scope.newEscuela.nombre,
+          poblado: $scope.newEscuela.poblado.id
+        }
+      })
+      .then(function success(res){
+        console.log("Info:: Respuesta del servidor: ", res.data);
+        if(res.data.id){
+          $scope.seleccionarEscuela(res.data);
+          $scope.mensajeParaUsuario = {
+            success:true,
+            mensaje: 'La escuela ' + res.data.nombre + 'fue registrada con éxito, con id: ' + res.data.id
+          };
+
+        }
+
+      },function error(res){
+        console.error("Error: Respuesta del servidor: ", res.data);
+        if(res.data.error){
+          $scope.mensajeParaUsuario = {
+            error:true,
+            mensaje: 'Hay un error en los datos enviados, la escuela no se registró. Quizás no se especificó el poblado de la lista.'
+          };
+        }
+
+      });
+
     };
 
     $scope.esElPobladoEE = function(poblado){
