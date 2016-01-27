@@ -21,7 +21,12 @@ angular.module('formApp', ['ngAnimate', 'ui.router'])
         // url will be nested (/form/profile)
         .state('form.elegirescuela', {
             url: '/escuela',
-            templateUrl: 'form-escuela.html'
+            templateUrl: 'form-elegir-escuela.html'
+        })
+
+        .state('form.registrarescuela', {
+            url: '/registrar-escuela',
+            templateUrl: 'form-registrar-escuela.html'
         })
 
         .state('form.personal', {
@@ -52,10 +57,10 @@ angular.module('formApp', ['ngAnimate', 'ui.router'])
 
     // we will store all of our form data in this object
     $scope.formData = {};
-    $scope.newPoblado = {};
-    $scope.newEscuela = {};
+    $scope.newPoblado = {nombre:''};
+    $scope.newEscuela = {nombre:'',poblado:{nombre:''}};
     $scope.newAlumno = {
-      escuela: $scope.newEscuela.id
+      escuela: null
     };
 
     // function to process the form
@@ -107,13 +112,33 @@ angular.module('formApp', ['ngAnimate', 'ui.router'])
       $scope.newAlumno.escuela = escuela.id;
     };
 
+    $scope.seleccionarPobladoE = function(poblado){
+      $scope.newEscuela.poblado = {
+          nombre: poblado.nombre,
+          id: poblado.id
+      };
+    };
+
     $scope.reiniciarEscuela = function(){
       $scope.newAlumno.escuela = null;
-      $scope.newEscuela = {};
+      $scope.newEscuela = {nombre:'',poblado:{nombre:''}};
+    };
+
+    $scope.reiniciarPobladoE = function(){
+      console.log("Reiniciando poblado");
+
+      $scope.newEscuela.poblado = {
+        nombre : '',
+      };
+
     };
 
     $scope.esLaEscuelaElegida = function(escuela){
       return (escuela.id === $scope.newEscuela.id);
+    };
+
+    $scope.esElPobladoEE = function(poblado){
+      return (poblado.id === $scope.newEscuela.poblado.id);
     };
 
     $scope.loadByType('escuela');

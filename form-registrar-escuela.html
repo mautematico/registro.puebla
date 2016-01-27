@@ -1,21 +1,21 @@
 <h2>¿Cuál es tu escuela?</h2>
 
 <div class="form-group">
-    <label for="name">Buscar por nombre:</label>
+    <label for="name">Nombre de la escuela:</label>
     <input type="text" class="form-control" name="escuelaNombre" ng-model="newEscuela.nombre">
 </div>
 
 <div class="form-group">
-    <label for="name">Buscar por poblado:</label>
+    <label for="name">Poblado:</label>
     <input type="text" class="form-control" name="escuelaPoblado" ng-model="newEscuela.poblado.nombre">
 </div>
 
 <div>
   <ul>
-    <li ng-repeat="escuela in escuelas | filter:newEscuela">
-      <span ng-click="reiniciarEscuela()" ng-show="esLaEscuelaElegida(escuela)" class="glyphicon glyphicon-check"></span>
-      <span ng-click="seleccionarEscuela(escuela)" ng-show="!newEscuela.id" class="glyphicon glyphicon-unchecked"></span>
-      {{escuela.nombre}} <b>{{escuela.poblado.nombre}}</b>
+    <li ng-repeat="poblado in poblados | filter:newEscuela.poblado">
+      <span ng-click="reiniciarPobladoE()" ng-show="esElPobladoEE(poblado)" class="glyphicon glyphicon-check"></span>
+      <span ng-click="seleccionarPobladoE(poblado)" ng-show="!newEscuela.poblado.id" class="glyphicon glyphicon-unchecked"></span>
+      {{poblado.nombre}}
     </li>
   </ul>
 </div>
@@ -23,8 +23,8 @@
 <div class="form-group row">
 
 <div class="col-xs-6 col-xs-offset-3" ng-show="!newEscuela.id">
-    <a ui-sref="form.registrarescuela" class="btn btn-block btn-info">
-    Mi escuela no está en la lista <span class="glyphicon glyphicon-plus"></span>
+    <a ui-sref="form.interests" class="btn btn-block btn-info">
+    El poblado de mi escuela no está en la lista <span class="glyphicon glyphicon-plus"></span>
     </a>
 </div>
 
