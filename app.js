@@ -20,8 +20,8 @@ angular.module('formApp', ['ngAnimate', 'ui.router'])
         // each of these sections will have their own view
         // url will be nested (/form/profile)
         .state('form.profile', {
-            url: '/profile',
-            templateUrl: 'form-profile.html'
+            url: '/escuela',
+            templateUrl: 'form-escuela.html'
         })
 
         // url will be /form/interests
@@ -38,7 +38,7 @@ angular.module('formApp', ['ngAnimate', 'ui.router'])
 
     // catch all route
     // send users to the form page
-    $urlRouterProvider.otherwise('/form/profile');
+    $urlRouterProvider.otherwise('/form/escuela');
 })
 
 // our controller for the form
