@@ -19,7 +19,7 @@ angular.module('formApp', ['ngAnimate', 'ui.router'])
         // nested states
         // each of these sections will have their own view
         // url will be nested (/form/profile)
-        .state('form.escuela', {
+        .state('form.elegirescuela', {
             url: '/escuela',
             templateUrl: 'form-escuela.html'
         })
