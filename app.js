@@ -65,7 +65,7 @@ angular.module('formApp', ['ngAnimate', 'ui.router'])
 
     // function to process the form
     $scope.processForm = function() {
-      var apiURL = 'http://localhost:1337/';
+      var apiURL = 'http://prueba.registro-puebla:1337/';
       var typeURL = apiURL + 'alumno';
 
       $scope.mensajeParaUsuario = {};
@@ -101,7 +101,7 @@ angular.module('formApp', ['ngAnimate', 'ui.router'])
     };
 
     $scope.loadByType = function(type){
-      var apiURL = 'http://localhost:1337/';
+      var apiURL = 'http://prueba.registro-puebla:1337/';
       var typePlural = null;
 
       switch (type) {
@@ -182,7 +182,7 @@ angular.module('formApp', ['ngAnimate', 'ui.router'])
     };
 
     $scope.registrarNewEscuela = function(){
-      var apiURL = 'http://localhost:1337/';
+      var apiURL = 'http://prueba.registro-puebla:1337/';
       var typeURL = apiURL + 'escuela';
 
       $http({
