@@ -10,7 +10,7 @@
           <!-- add the active class if the state matches our ui-sref -->
           <div id="status-buttons" class="text-center">
               <a ui-sref-active="active" ui-sref=".escuela"><span>1</span> Escuela</a>
-              <a ui-sref-active="active" ui-sref=".interests"><span>2</span> Personal</a>
+              <a ui-sref-active="active" ui-sref=".personal"><span>2</span> Personal</a>
               <a ui-sref-active="active" ui-sref=".payment"><span>3</span> Confirma</a>
           </div>
       </div>
@@ -26,6 +26,9 @@
   <!-- show our formData as it is being typed -->
   <pre>
     {{ newEscuela }}
+  </pre>
+  <pre>
+    {{ newAlumno }}
   </pre>
 
 </div>

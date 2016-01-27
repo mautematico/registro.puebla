@@ -54,7 +54,9 @@ angular.module('formApp', ['ngAnimate', 'ui.router'])
     $scope.formData = {};
     $scope.newPoblado = {};
     $scope.newEscuela = {};
-    $scope.newAlumno = {};
+    $scope.newAlumno = {
+      escuela: $scope.newEscuela.id
+    };
 
     // function to process the form
     $scope.processForm = function() {
@@ -101,9 +103,12 @@ angular.module('formApp', ['ngAnimate', 'ui.router'])
           nombre: escuela.poblado.nombre
         }
       };
+
+      $scope.newAlumno.escuela = escuela.id;
     };
 
     $scope.reiniciarEscuela = function(){
+      $scope.newAlumno.escuela = null;
       $scope.newEscuela = {};
     };
 
