@@ -2,11 +2,39 @@
 
 <div class="form-group">
     <label for="name">Buscar por nombre:</label>
-    <input type="text" class="form-control" name="name" ng-model="newEscuela.nombre">
+    <input type="text" class="form-control" name="escuelaNombre" ng-model="newEscuela.nombre">
+</div>
+
+<div class="form-group">
+    <label for="name">Buscar por poblado:</label>
+    <input type="text" class="form-control" name="escuelaPoblado" ng-model="newEscuela.poblado.nombre">
+</div>
+
+<div>
+  <ul>
+    <li ng-click="seleccionarEscuela(escuela)" ng-repeat="escuela in escuelas | filter:newEscuela">
+      <span ng-show="esLaEscuelaElegida(escuela)" class="glyphicon glyphicon-check"></span>
+      <span ng-show="!newEscuela.id" class="glyphicon glyphicon-unchecked"></span>
+      {{escuela.nombre}} <b>{{escuela.poblado.nombre}}</b>
+    </li>
+  </ul>
 </div>
 
 <div class="form-group row">
-<div class="col-xs-6 col-xs-offset-3">
+
+<div class="col-xs-6 col-xs-offset-3" ng-show="!newEscuela.id">
+    <a ui-sref="form.interests" class="btn btn-block btn-info">
+    Mi escuela no está en la lista <span class="glyphicon glyphicon-plus"></span>
+    </a>
+</div>
+
+<div class="col-xs-6" ng-show="newEscuela.id">
+    <a class="btn btn-block btn-danger" ng-click="reiniciarEscuela()">
+    <span class="glyphicon glyphicon-circle-arrow-left"></span> Volver a buscar
+    </a>
+</div>
+
+<div class="col-xs-6" ng-show="newEscuela.id">
     <a ui-sref="form.interests" class="btn btn-block btn-info">
     Continuar <span class="glyphicon glyphicon-circle-arrow-right"></span>
     </a>

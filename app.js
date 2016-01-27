@@ -19,7 +19,7 @@ angular.module('formApp', ['ngAnimate', 'ui.router'])
         // nested states
         // each of these sections will have their own view
         // url will be nested (/form/profile)
-        .state('form.profile', {
+        .state('form.escuela', {
             url: '/escuela',
             templateUrl: 'form-escuela.html'
         })
@@ -43,7 +43,7 @@ angular.module('formApp', ['ngAnimate', 'ui.router'])
 
 // our controller for the form
 // =============================================================================
-.controller('formController', function($scope) {
+.controller('formController', ['$scope','$http',function($scope,$http) {
 
     // we will store all of our form data in this object
     $scope.formData = {};
@@ -56,4 +56,57 @@ angular.module('formApp', ['ngAnimate', 'ui.router'])
         alert('awesome!');
     };
 
-});
+    $scope.loadByType = function(type){
+      var apiURL = 'http://localhost:1337/';
+      var typePlural = null;
+
+      switch (type) {
+        case 'escuela':
+          typePlural = 'escuelas';
+          break;
+        case 'poblado':
+          typePlural = 'poblados';
+          break;
+        default:
+          break;
+      }
+
+      if(typeURL === null){
+        return;
+      }
+
+      var typeURL = apiURL + type;
+
+      $http.get(typeURL)
+      .then(function success(res){
+        $scope[typePlural] = res.data;
+        console.log("Info::", res.data.length , typePlural, "en memoria.");
+      },function error(res){
+        console.error("error cargando ", typePlural);
+        alert("error cargando " + typePlural);
+      });
+
+    };
+
+    $scope.seleccionarEscuela = function(escuela){
+      $scope.newEscuela = {
+        id: escuela.id,
+        nombre: escuela.nombre,
+        poblado : {
+          nombre: escuela.poblado.nombre
+        }
+      };
+    };
+
+    $scope.reiniciarEscuela = function(){
+      $scope.newEscuela = {};
+    };
+
+    $scope.esLaEscuelaElegida = function(escuela){
+      return (escuela.id === $scope.newEscuela.id);
+    };
+
+    $scope.loadByType('escuela');
+    $scope.loadByType('poblado');
+
+}]);
